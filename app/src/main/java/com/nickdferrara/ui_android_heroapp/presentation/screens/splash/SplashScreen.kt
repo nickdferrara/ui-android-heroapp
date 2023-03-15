@@ -1,7 +1,5 @@
-package com.nickdferrara.ui_android_heroapp.presentations.screens.splash
+package com.nickdferrara.ui_android_heroapp.presentation.screens.splash
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.animation.Animatable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme

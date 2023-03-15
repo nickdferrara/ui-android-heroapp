@@ -12,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.nickdferrara.ui_android_heroapp.navigation.SetupNavigationGraph
 import com.nickdferrara.ui_android_heroapp.ui.theme.UiandroidheroappTheme
 import dagger.hilt.android.AndroidEntryPoint
-
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
