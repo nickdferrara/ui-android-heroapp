@@ -19,6 +19,7 @@ import com.google.accompanist.pager.*
 import com.nickdferrara.ui_android_heroapp.R
 import com.nickdferrara.ui_android_heroapp.domain.models.OnBoardingPage
 import com.nickdferrara.ui_android_heroapp.ui.theme.*
+import com.nickdferrara.ui_android_heroapp.util.Constants.LAST_ON_BOARDING_PAGE
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -117,7 +118,7 @@ fun FinishButton(
         AnimatedVisibility(
             modifier = Modifier
                 .fillMaxWidth(),
-            visible = pagerState.currentPage == 2
+            visible = pagerState.currentPage == LAST_ON_BOARDING_PAGE
         ) {
             Button(
                 onClick = onItemClick,
