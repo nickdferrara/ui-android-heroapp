@@ -1,4 +1,4 @@
-package com.nickdferrara.ui_android_heroapp.domain.repository.interfaces
+package com.nickdferrara.ui_android_heroapp.domain.interfaces
 
 import kotlinx.coroutines.flow.Flow
 
