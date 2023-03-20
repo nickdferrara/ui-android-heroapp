@@ -5,9 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -21,10 +18,18 @@ import com.nickdferrara.ui_android_heroapp.ui.theme.Purple500
 import com.nickdferrara.ui_android_heroapp.ui.theme.Purple700
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.*
 import androidx.compose.ui.draw.rotate
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.nickdferrara.ui_android_heroapp.navigation.Screen
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
+fun SplashScreen(
+    navController: NavHostController,
+    splashScreenViewModel: SplashScreenViewModel = hiltViewModel()
+
+) {
+    val onBoardingCompleted by splashScreenViewModel.onBoardingCompleted.collectAsState()
     val degrees = remember { Animatable(0f) }
     
     LaunchedEffect(key1 = true) {
@@ -35,8 +40,13 @@ fun SplashScreen(navController: NavHostController) {
                 delayMillis = 200
             )
         )
+        navController.popBackStack()
+        if (onBoardingCompleted) {
+            navController.navigate(Screen.Home.route)
+        } else {
+            navController.navigate(Screen.Welcome.route)
+        }
     }
-
     Splash(degrees = degrees.value)
 }
 

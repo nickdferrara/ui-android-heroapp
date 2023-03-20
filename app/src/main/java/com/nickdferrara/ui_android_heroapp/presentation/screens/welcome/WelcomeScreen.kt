@@ -14,16 +14,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.*
 import com.nickdferrara.ui_android_heroapp.R
 import com.nickdferrara.ui_android_heroapp.domain.models.OnBoardingPage
+import com.nickdferrara.ui_android_heroapp.navigation.Screen
 import com.nickdferrara.ui_android_heroapp.ui.theme.*
 import com.nickdferrara.ui_android_heroapp.util.Constants.LAST_ON_BOARDING_PAGE
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeScreenViewModel: WelcomeScreenViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
@@ -58,7 +63,11 @@ fun WelcomeScreen(navController: NavHostController) {
         )
         FinishButton(
             modifier = Modifier.weight(1f),
-            pagerState = pagerState) {
+            pagerState = pagerState
+        ) {
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+            welcomeScreenViewModel.saveOnBoardingState(completed = true)
         }
     }    
 }
