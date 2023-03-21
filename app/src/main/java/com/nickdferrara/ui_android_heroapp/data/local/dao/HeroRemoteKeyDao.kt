@@ -8,12 +8,12 @@ import com.nickdferrara.ui_android_heroapp.domain.models.HeroRemoteKeys
 
 @Dao
 interface HeroRemoteKeyDao {
-    @Query("SELECT * FROM hero_remote_key_table WHERE id = :id")
-    suspend fun getRemoteKey(id: Int): HeroRemoteKeys?
+    @Query("SELECT * FROM hero_remote_keys_table WHERE id = :id")
+    suspend fun getRemoteKeys(id: Int): HeroRemoteKeys?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllRemoteKeys(heroRemoteKeys: List<HeroRemoteKeys>)
 
-    @Query("DELETE FROM hero_remote_key_table")
+    @Query("DELETE FROM hero_remote_keys_table")
     suspend fun deleteAllRemoteKeys()
 }
