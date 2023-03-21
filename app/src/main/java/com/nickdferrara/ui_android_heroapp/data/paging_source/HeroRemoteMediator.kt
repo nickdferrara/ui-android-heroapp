@@ -8,7 +8,7 @@ import androidx.room.withTransaction
 import com.nickdferrara.ui_android_heroapp.data.local.BorutoDatabase
 import com.nickdferrara.ui_android_heroapp.data.remote.IBorutoApi
 import com.nickdferrara.ui_android_heroapp.domain.models.Hero
-import com.nickdferrara.ui_android_heroapp.domain.models.HeroRemoteKey
+import com.nickdferrara.ui_android_heroapp.domain.models.HeroRemoteKeys
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -67,7 +67,7 @@ class HeroRemoteMediator @Inject constructor(
                     val prevPage = response.prevPage
                     val nextPage = response.nextPage
                     val keys = response.heroes.map { hero ->
-                        HeroRemoteKey(
+                        HeroRemoteKeys(
                             id = hero.id,
                             prevPage = prevPage,
                             nextPage = nextPage,
@@ -86,7 +86,7 @@ class HeroRemoteMediator @Inject constructor(
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
         state: PagingState<Int, Hero>
-    ): HeroRemoteKey? {
+    ): HeroRemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 heroRemoteKeysDao.getRemoteKey(id = id)
@@ -96,7 +96,7 @@ class HeroRemoteMediator @Inject constructor(
 
     private suspend fun getRemoteKeyForFirstItem(
         state: PagingState<Int, Hero>
-    ): HeroRemoteKey? {
+    ): HeroRemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { hero ->
                 heroRemoteKeysDao.getRemoteKey(id = hero.id)
@@ -105,7 +105,7 @@ class HeroRemoteMediator @Inject constructor(
 
     private suspend fun getRemoteKeyForLastItem(
         state: PagingState<Int, Hero>
-    ): HeroRemoteKey? {
+    ): HeroRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { hero ->
                 heroRemoteKeysDao.getRemoteKey(id = hero.id)

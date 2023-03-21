@@ -6,9 +6,9 @@ import androidx.room.TypeConverters
 import com.nickdferrara.ui_android_heroapp.data.local.dao.HeroDao
 import com.nickdferrara.ui_android_heroapp.data.local.dao.HeroRemoteKeyDao
 import com.nickdferrara.ui_android_heroapp.domain.models.Hero
-import com.nickdferrara.ui_android_heroapp.domain.models.HeroRemoteKey
+import com.nickdferrara.ui_android_heroapp.domain.models.HeroRemoteKeys
 
-@Database(entities = [Hero::class, HeroRemoteKey::class], version = 1)
+@Database(entities = [Hero::class, HeroRemoteKeys::class], version = 1)
 @TypeConverters(DatabaseConverter::class)
 abstract class BorutoDatabase: RoomDatabase() {
     abstract fun heroDao(): HeroDao
